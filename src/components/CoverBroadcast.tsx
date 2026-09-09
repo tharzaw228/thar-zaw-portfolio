@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { detectSoftMotion } from '../lib/motion'
 
 type Phase = 'off' | 'static' | 'bumper' | 'live'
 
@@ -15,8 +16,11 @@ export function useBroadcastLive() {
   return useContext(BroadcastLiveContext)
 }
 
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+function skipBroadcast() {
+  return (
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    detectSoftMotion()
+  )
 }
 
 export function CoverBroadcast({
@@ -27,13 +31,13 @@ export function CoverBroadcast({
   live?: boolean
 }) {
   const [phase, setPhase] = useState<Phase>(() =>
-    prefersReducedMotion() ? 'live' : 'off',
+    skipBroadcast() ? 'live' : 'off',
   )
   const runRef = useRef(0)
 
   useEffect(() => {
     if (!live) return
-    if (prefersReducedMotion()) {
+    if (skipBroadcast()) {
       setPhase('live')
       return
     }

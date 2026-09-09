@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { CERTIFICATIONS, EDUCATION } from '../data/portfolio'
+import { useSoftMotion } from '../hooks/useSoftMotion'
 
 const LEFT_SCHOOLS = EDUCATION.slice(0, 3)
 const RIGHT_SCHOOLS = EDUCATION.slice(3)
@@ -26,18 +27,20 @@ function SchoolCard({
   entry,
   index,
   showCursor,
+  reduce,
 }: {
   entry: (typeof EDUCATION)[number]
   index: number
   showCursor?: boolean
+  reduce: boolean
 }) {
   return (
     <motion.article
       className="term-window"
-      initial={{ opacity: 0, y: 8 }}
+      initial={reduce ? false : { opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-20px' }}
-      transition={{ duration: 0.2, delay: index * 0.04 }}
+      transition={{ duration: reduce ? 0 : 0.2, delay: reduce ? 0 : index * 0.04 }}
     >
       <header className="term-chrome">
         <TermDots />
@@ -57,6 +60,8 @@ function SchoolCard({
 }
 
 export function EducationSection() {
+  const reduce = useSoftMotion()
+
   return (
     <section id="education" className="education-lab" aria-labelledby="education-heading">
       <header className="education-lab-head">
@@ -64,7 +69,7 @@ export function EducationSection() {
           <p className="font-label text-xs text-muted">the command line · school records</p>
           <h2
             id="education-heading"
-            className="font-hand text-3xl font-semibold text-ink sm:text-4xl"
+            className="font-hand text-2xl font-normal text-ink lg:text-4xl lg:font-semibold"
           >
             Educations
           </h2>
@@ -74,17 +79,17 @@ export function EducationSection() {
       <div className="education-grid">
         <div className="education-stack">
           {LEFT_SCHOOLS.map((entry, index) => (
-            <SchoolCard key={entry.id} entry={entry} index={index} />
+            <SchoolCard key={entry.id} entry={entry} index={index} reduce={reduce} />
           ))}
         </div>
 
         <div className="education-stack is-side">
           <motion.aside
             className="term-window is-credentials"
-            initial={{ opacity: 0, y: 8 }}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.2, delay: 0.08 }}
+            transition={{ duration: reduce ? 0 : 0.2, delay: reduce ? 0 : 0.08 }}
           >
             <header className="term-chrome">
               <TermDots />
@@ -112,6 +117,7 @@ export function EducationSection() {
               entry={entry}
               index={index + LEFT_SCHOOLS.length}
               showCursor
+              reduce={reduce}
             />
           ))}
         </div>

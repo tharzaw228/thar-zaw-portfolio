@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useSoftMotion } from '../hooks/useSoftMotion'
 import { PROJECTS } from '../data/portfolio'
 import { IconIsoCube, projectIcons } from './SketchIcons'
 
@@ -66,7 +67,7 @@ function HouseColumn() {
 }
 
 export function WorkDoorway() {
-  const reduce = Boolean(useReducedMotion())
+  const reduce = useSoftMotion()
   const [index, setIndex] = useState(0)
   const [open, setOpen] = useState(false)
   const [busy, setBusy] = useState(false)
@@ -121,7 +122,7 @@ export function WorkDoorway() {
       <header className="work-house-head">
         <div className="sketch-heading">
           <p className="font-label text-xs text-muted">the front door · one job at a time</p>
-          <h2 id="projects-heading" className="font-hand text-3xl font-semibold text-ink sm:text-4xl">
+          <h2 id="projects-heading" className="font-hand text-2xl font-normal text-ink lg:text-4xl lg:font-semibold">
             Work
           </h2>
         </div>
@@ -152,10 +153,10 @@ export function WorkDoorway() {
               transition={{ duration: 0.28, delay: open ? 0.18 : 0 }}
             >
               <div className="house-work-top">
-                <Icon className="h-12 w-12" title={project.title} />
-                <div>
-                  <p className="font-label text-sm text-muted">{project.tag}</p>
-                  <h3 className="font-hand text-3xl font-semibold text-ink sm:text-4xl">
+                <Icon className="h-8 w-8 lg:h-12 lg:w-12" title={project.title} />
+                <div className="house-work-title">
+                  <p className="font-label text-xs text-muted lg:text-sm">{project.tag}</p>
+                  <h3 className="font-hand text-[1.3rem] font-normal leading-tight text-ink lg:text-4xl lg:font-semibold lg:leading-[1.15]">
                     {project.title}
                   </h3>
                 </div>
@@ -169,11 +170,15 @@ export function WorkDoorway() {
 
               <div className="house-work-copy">
                 <div>
-                  <p className="font-hand text-xl text-pencil-terra">Problem</p>
+                  <p className="font-hand text-base font-normal text-pencil-terra lg:text-xl">
+                    Problem
+                  </p>
                   <p className="font-note text-graphite">{project.problem}</p>
                 </div>
                 <div>
-                  <p className="font-hand text-xl text-pencil-forest">Solution</p>
+                  <p className="font-hand text-base font-normal text-pencil-forest lg:text-xl">
+                    Solution
+                  </p>
                   <p className="font-note text-graphite">{project.solution}</p>
                 </div>
               </div>
@@ -183,7 +188,7 @@ export function WorkDoorway() {
               <nav className="house-nav" aria-label="Work experiences">
                 <button
                   type="button"
-                  className="sketch-btn house-nav-btn font-note text-base"
+                  className="sketch-btn house-nav-btn house-nav-prev font-note text-base"
                   onClick={() => void go(index - 1)}
                   disabled={busy || index === 0}
                 >
@@ -204,7 +209,7 @@ export function WorkDoorway() {
                 </div>
                 <button
                   type="button"
-                  className="sketch-btn house-nav-btn font-note text-base"
+                  className="sketch-btn house-nav-btn house-nav-close font-note text-base"
                   onClick={() => void closeDoors()}
                   disabled={busy}
                 >
@@ -212,7 +217,7 @@ export function WorkDoorway() {
                 </button>
                 <button
                   type="button"
-                  className="sketch-btn house-nav-btn font-note text-base"
+                  className="sketch-btn house-nav-btn house-nav-next font-note text-base"
                   onClick={() => void go(index + 1)}
                   disabled={busy || index === PROJECTS.length - 1}
                 >

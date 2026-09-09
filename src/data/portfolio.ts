@@ -1,6 +1,5 @@
 export const TYPEWRITER_PHRASES = [
   'Enterprise Java Systems',
-  'Offline-First Architecture',
   'Custom ERP Modules',
 ] as const
 
@@ -53,9 +52,9 @@ export const PROJECTS = [
 ] as const
 
 export const EXPERIENCE_HIGHLIGHTS = [
-  'Associate Developer',
-  'Java Web Developer · Yangon, Myanmar',
-  'Jenkins CI/CD · Multi-environment deployments',
+  'Software Engineer',
+  'Core Microfinance Platforms'
+   
 ] as const
 
 export const CONTACT_LINKS = [
@@ -145,7 +144,7 @@ export const SKILL_CATEGORIES = [
       'Linux Servers',
       'Windows Servers',
       'Apache Tomcat',
-      'SSH / Deployments',
+      'Deployments',
     ],
   },
   {
@@ -199,10 +198,5 @@ export const CERTIFICATIONS = [
     name: "CS50's Introduction to Programming with Python",
     issuer: 'HarvardX',
     date: 'Jan 2023',
-  },
-  {
-    name: 'Odoo Development',
-    issuer: 'Professional',
-    date: 'Verified',
   },
 ] as const

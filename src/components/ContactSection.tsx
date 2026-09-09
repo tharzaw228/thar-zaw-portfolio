@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useSoftMotion } from '../hooks/useSoftMotion'
 import { CONTACT_LINKS } from '../data/portfolio'
 import { Footer } from './Footer'
 import { contactIcons, IconIsoEnvelope } from './SketchIcons'
@@ -9,7 +10,7 @@ function wait(ms: number) {
 }
 
 export function ContactSection() {
-  const reduce = Boolean(useReducedMotion())
+  const reduce = useSoftMotion()
   const [open, setOpen] = useState(false)
   const [busy, setBusy] = useState(false)
 
@@ -37,7 +38,7 @@ export function ContactSection() {
       <header className="letter-desk-head">
         <div className="sketch-heading">
           <p className="font-label text-xs text-muted">the letter box · write back</p>
-          <h2 id="contact-heading" className="font-hand text-3xl font-semibold text-ink sm:text-4xl">
+          <h2 id="contact-heading" className="font-hand text-2xl font-normal text-ink lg:text-4xl lg:font-semibold">
             Contact
           </h2>
         </div>

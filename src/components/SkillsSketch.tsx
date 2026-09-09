@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useSoftMotion } from '../hooks/useSoftMotion'
 import { LANGUAGES, SKILL_CATEGORIES } from '../data/portfolio'
 import { WashiTape } from './PaperBackdrop'
 import { skillIcons } from './SketchIcons'
@@ -67,14 +68,14 @@ function GalleryPiece({
 }
 
 export function SkillsSketch() {
-  const reduce = Boolean(useReducedMotion())
+  const reduce = useSoftMotion()
 
   return (
     <section id="skills" className="gallery" aria-labelledby="skills-heading">
       <header className="gallery-title">
         <div className="sketch-heading">
           <p className="font-label text-xs text-muted">room 02 · works on the wall</p>
-          <h2 id="skills-heading" className="font-hand text-3xl font-semibold text-ink sm:text-4xl">
+          <h2 id="skills-heading" className="font-hand text-2xl font-normal text-ink lg:text-4xl lg:font-semibold">
             Skills
           </h2>
         </div>
@@ -83,18 +84,17 @@ export function SkillsSketch() {
       <div className="gallery-wall">
         <div className="gallery-rail" aria-hidden="true" />
 
-        <GalleryPiece id="backend" delay={0.04} reduce={reduce} />
-        <GalleryPiece id="frontend" delay={0.12} reduce={reduce} />
-        <GalleryPiece id="professional" delay={0.18} reduce={reduce} />
-        <GalleryPiece id="devops" delay={0.22} reduce={reduce} />
-        <GalleryPiece id="erp" delay={0.28} reduce={reduce} />
-        <GalleryPiece id="engineering" delay={0.34} reduce={reduce} />
+        {SKILL_CATEGORIES.map((category, index) => (
+          <GalleryPiece key={category.id} id={category.id} delay={0.04 + index * 0.06} reduce={reduce} />
+        ))}
 
         <motion.aside
           className="gallery-piece is-diptych is-gilt"
           initial={reduce ? false : { opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 80, damping: 14, delay: 0.42 }}
+          transition={
+            reduce ? { duration: 0 } : { type: 'spring', stiffness: 80, damping: 14, delay: 0.42 }
+          }
         >
           <HangWire />
           <div className="gallery-diptych">

@@ -14,14 +14,14 @@ export function Hero() {
   const revealed = useBroadcastLive()
 
   return (
-    <header id="home" className="sketch-card col-span-full p-8 sm:p-10 lg:p-12">
+    <header id="home" className="sketch-card col-span-full p-5 sm:p-10 lg:p-12">
       <WashiTape className="-top-1.5 left-10" rotate={-7} />
       <WashiTape className="-top-1 right-16 hidden sm:block" rotate={5} />
 
-      <div className="relative grid items-start gap-8 lg:grid-cols-[1fr_auto]">
+      <div className="relative grid items-start gap-5 sm:gap-8 lg:grid-cols-[1fr_auto]">
         <div>
           <motion.div
-            className="mb-6 flex flex-wrap items-center gap-3"
+            className="mb-3 flex flex-wrap items-center gap-3 sm:mb-6"
             variants={item}
             initial="hidden"
             animate="visible"
@@ -37,7 +37,7 @@ export function Hero() {
           </motion.div>
 
           <motion.p
-            className="mb-1 font-hand text-3xl text-pencil-terra sm:text-4xl"
+            className="mb-1 font-hand text-2xl font-normal text-pencil-terra sm:text-4xl"
             variants={item}
             initial="hidden"
             animate="visible"
@@ -47,18 +47,17 @@ export function Hero() {
           </motion.p>
 
           <motion.h1
-            className="max-w-3xl font-hand text-4xl leading-[1.15] font-semibold tracking-wide text-ink sm:text-5xl lg:text-[3.25rem]"
+            className="max-w-3xl font-hand text-[1.45rem] leading-[1.25] font-normal tracking-wide text-ink sm:text-5xl sm:leading-[1.15] sm:font-semibold lg:text-[3.25rem]"
             variants={item}
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.28, delay: 0.12, ease: 'easeOut' }}
           >
-            Full-Stack Engineer building high-availability enterprise systems &amp;
-            offline-first mobile applications.
+            Full-Stack Engineer building high-availability enterprise systems.
           </motion.h1>
 
           <motion.div
-            className="mt-7 min-h-[2rem]"
+            className="mt-3 min-h-[1.4rem] sm:mt-7 sm:min-h-[2rem]"
             variants={item}
             initial="hidden"
             animate="visible"
@@ -68,7 +67,7 @@ export function Hero() {
           </motion.div>
 
           <motion.ul
-            className="mt-8 flex flex-wrap gap-2"
+            className="mt-3 flex flex-wrap gap-2 sm:mt-8"
             variants={item}
             initial="hidden"
             animate="visible"
